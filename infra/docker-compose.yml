@@ -1,6 +1,6 @@
 services:
   jenkins:
-    image: jenkins/jenkins:lts
+    build: /Users/sseebald/code/nginx_demo/infra/
     ports:
       - "8080:8080"
       - "50000:50000"
