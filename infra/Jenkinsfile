@@ -17,7 +17,6 @@ pipeline {
         stage('Evaluate CVE counts') {	        
             steps {
                 sh 'grype $IMAGE_DOCKERHUB --fail-on high -o table || true'
-                sh 'grype $IMAGE_CHAINGUAAGE_DOCKERHUB --fail-on high -o table || true'
                 sh 'grype $IMAGE_CHAINGUARD --fail-on high -o table || true'
             }
         }

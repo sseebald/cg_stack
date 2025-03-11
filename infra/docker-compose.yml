@@ -5,7 +5,7 @@ services:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - /Users/sseebald/code/nginx_demo/infra/jenkins_home:/var/jenkins_home
+      - /Users/sseebald/code/tmp/jenkins_home:/var/jenkins_home
       - /Users/sseebald/code/nginx_demo/infra/jenkins_casc:/var/jenkins_home/casc_configs
     environment:
       - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs
