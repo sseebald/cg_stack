@@ -7,7 +7,8 @@ RUN jenkins-plugin-cli --plugins \
     git \
     credentials-binding \
     prometheus \
-    blueocean
+    blueocean \
+    job-dsl
 
 RUN mkdir -p /var/jenkins_home/casc_configs && \
     chown -R jenkins:jenkins /var/jenkins_home/casc_configs

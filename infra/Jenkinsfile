@@ -22,6 +22,7 @@ pipeline {
         }
 
         stage('Verify CG image') {
+            steps {
                 sh 'cosign verify $IMAGE_CHAINGUARD || echo "Verification failed"'
             }
         }

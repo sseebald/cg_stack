@@ -1,28 +1,28 @@
 jenkins:
   securityRealm:
     local:
-      allowSignup: false
       users:
         - id: "sseebald"
           password: "cg2025"
   authorizationStrategy: loggedInUsersCanDoAnything
   systemMessage: "Jenkins configured with JCasC"
   numExecutors: 2
-  jobs:
-    - script: >
-        pipelineJob('SecurePipeline') {
-          definition {
-            cpsScm {
-              scm {
-                git {
-                  remote {
-                    url 'https://github.com/sseebald/cg_stack.git'
-                  }
-                  branches 'main'
+
+jobs:
+  - script: >
+      pipelineJob('SecurePipeline') {
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url 'https://github.com/sseebald/cg_stack.git'
                 }
+                branches 'main'
               }
-              scriptPath 'infra/Jenkinsfile'
             }
+            scriptPath 'infra/Jenkinsfile'
           }
         }
+      }
 
