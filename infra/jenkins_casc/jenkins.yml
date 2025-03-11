@@ -16,12 +16,12 @@ jenkins:
               scm {
                 git {
                   remote {
-                    url 'https://github.com/your-repo.git'
+                    url 'https://github.com/sseebald/cg_stack.git'
                   }
                   branches 'main'
                 }
               }
-              scriptPath 'Jenkinsfile'
+              scriptPath 'infra/Jenkinsfile'
             }
           }
         }
