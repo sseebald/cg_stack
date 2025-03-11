@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_DOCKERHUB = "nginx:latest"
+        IMAGE_CHAINGUARD = "cgr.dev/chainguard/nginx"
+    }
+
+    stages {
+        stage('Generate SBOMs') {
+            steps {
+                sh 'syft $IMAGE_DOCKERHUB -o spdx-json > sbom-dockerhub.json'
+                sh 'syft $IMAGE_CHAINGUARD -o spdx-json > sbom-chainguard.json'
+            }
+        }
+
+        stage('Evaluate CVE counts') {	        
+            steps {
+                sh 'grype $IMAGE_DOCKERHUB --fail-on high -o table || true'
+                sh 'grype $IMAGE_CHAINGUAAGE_DOCKERHUB --fail-on high -o table || true'
+                sh 'grype $IMAGE_CHAINGUARD --fail-on high -o table || true'
+            }
+        }
+
+        stage('Verify CG image') {
+                sh 'cosign verify $IMAGE_CHAINGUARD || echo "Verification failed"'
+            }
+        }
+
+        stage('Deploy NGINX with Docker Compose') {
+            steps {
+                sh 'docker compose -f docker-compose.nginx.yml up -d'
+            }
+        }
+    }
+}
+

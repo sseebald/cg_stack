@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'jenkins'
+    static_configs:
+      - targets: ['jenkins:8080']
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx-off-the-shelf:80', 'nginx-chainguard:80']
+
